@@ -12,6 +12,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { loginSuccess } from "../Store/authSlice";
+import { API_URL } from "../config";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -20,14 +21,14 @@ const Profile = () => {
   const [name, setName] = useState(user?.name || "");
   const [email, setEmail] = useState(user?.email || "");
   const [image, setImage] = useState(user?.image || "");
-  const [preview, setPreview] = useState(user?.image ? `http://localhost:5000${user.image}` : null);
+  const [preview, setPreview] = useState(user?.image ? `${API_URL}${user.image}` : null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setName(user?.name || "");
     setEmail(user?.email || "");
     setImage(user?.image || "");
-    setPreview(user?.image ? `http://localhost:5000${user.image}` : null);
+    setPreview(user?.image ? `${API_URL}${user.image}` : null);
   }, [user]);
 
   // handle image change & preview
@@ -38,12 +39,12 @@ const Profile = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/upload/profile-image",
+        `${API_URL}/api/upload/profile-image`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
       setImage(res.data.imageUrl);
-      setPreview(`http://localhost:5000${res.data.imageUrl}`);
+      setPreview(`${API_URL}${res.data.imageUrl}`);
     } catch (err) {
       console.error("Profile update error:", err.response?.data || err);
       alert("Image upload failed");
@@ -57,7 +58,7 @@ const Profile = () => {
     setLoading(true);
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/auth/update-user/${user.id}`,
+        `${API_URL}/api/auth/update-user/${user.id}`,
         { name, email, image },
         { headers: { Authorization: `Bearer ${token}` } }
       );

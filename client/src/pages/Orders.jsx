@@ -16,6 +16,7 @@ import {
   Chip,
 } from "@mui/material";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
+import { API_URL } from "../config";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -24,7 +25,7 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/orders");
+      const res = await fetch(`${API_URL}/api/orders`);
       const data = await res.json();
 
       const sorted = data.sort(

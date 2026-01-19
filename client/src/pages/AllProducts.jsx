@@ -16,8 +16,7 @@ import {
   TextField,
 } from "@mui/material";
 import { Delete, Edit, Save } from "@mui/icons-material";
-
-const API_URL = "http://localhost:5000"; // <- correct base URL
+import { API_URL } from "../config";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);

@@ -12,6 +12,7 @@ import {
   Paper,
 } from "@mui/material";
 import axios from "axios";
+import { API_URL } from "../config";
 
 const AddItems = () => {
   const [name, setName] = useState("");
@@ -37,7 +38,7 @@ const AddItems = () => {
     formData.append("image", file);
 
     const res = await axios.post(
-      "http://localhost:5000/api/upload/product-image",
+      `${API_URL}/api/upload/product-image`,
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
     );
@@ -59,7 +60,7 @@ const AddItems = () => {
       const imageUrl = await uploadImage(image);
 
       // 2️⃣ Send product data
-      const res = await axios.post("http://localhost:5000/api/products", {
+      const res = await axios.post(`${API_URL}/api/products`, {
         name,
         price,
         description,

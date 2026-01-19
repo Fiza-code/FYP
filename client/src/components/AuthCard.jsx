@@ -12,8 +12,7 @@ import {
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../Store/authSlice"; // store user in redux
-
-const API_URL = "http://localhost:5000/api/auth";
+import { API_URL } from "../config";
 
 const AuthCard = ({ open, onClose, isSignup, setIsSignup }) => {
   const dispatch = useDispatch();
@@ -27,10 +26,10 @@ const AuthCard = ({ open, onClose, isSignup, setIsSignup }) => {
   const handleSubmit = async () => {
     try {
       if (isSignup) {
-        await axios.post(`${API_URL}/signup`, formData);
+        await axios.post(`${API_URL}/api/auth/signup`, formData);
         setIsSignup(false); // switch to login after signup
       } else {
-        const res = await axios.post(`${API_URL}/login`, {
+        const res = await axios.post(`${API_URL}/api/auth/login`, {
           email: formData.email,
           password: formData.password,
         });

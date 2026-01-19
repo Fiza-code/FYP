@@ -12,6 +12,7 @@ import {
   CircularProgress,
   Chip,
 } from "@mui/material";
+import { API_URL } from "../config";
 
 const Orderspanel = () => {
   const [orders, setOrders] = useState([]);
@@ -19,7 +20,7 @@ const Orderspanel = () => {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/orders");
+      const res = await fetch(`${API_URL}/api/orders`);
       const data = await res.json();
 
       const sorted = data.sort(

@@ -7,6 +7,7 @@ import { Add, Remove, Delete } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart, updateQuantity, deleteProduct } from "../Store/cartSlice";
 import axios from "axios";
+import { API_URL } from "../config";
 
 const CheckoutPage = () => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const CheckoutPage = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/orders", {
+      const res = await axios.post(`${API_URL}/api/orders`, {
         userId: "user123", // replace with auth user
         customer,
         paymentMethod,

@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { API_URL } from '../config';
 
 // Fetch latest products
 export const fetchLatestProducts = createAsyncThunk(
   'products/fetchLatest',
   async () => {
-    const res = await axios.get('http://localhost:5000/api/products/latest');
+    const res = await axios.get(`${API_URL}/api/products/latest`);
     return res.data;
   }
 );
@@ -14,7 +15,7 @@ export const fetchLatestProducts = createAsyncThunk(
 export const fetchBestSellers = createAsyncThunk(
   'products/fetchBestSellers',
   async () => {
-    const res = await axios.get('http://localhost:5000/api/products/best-sellers');
+    const res = await axios.get(`${API_URL}/api/products/best-sellers`);
     return res.data;
   }
 );
@@ -23,7 +24,7 @@ export const fetchBestSellers = createAsyncThunk(
 export const fetchCollectionProducts = createAsyncThunk(
   'products/fetchCollection',
   async ({ category = '', type = '', sort = '' }) => {
-    const res = await axios.get('http://localhost:5000/api/products/collection', {
+    const res = await axios.get(`${API_URL}/products/collection`, {
       params: { category, type, sort },
     });
     return res.data;
@@ -34,7 +35,7 @@ export const fetchCollectionProducts = createAsyncThunk(
 export const fetchProductById = createAsyncThunk(
   'products/fetchById',
   async (productId) => {
-    const res = await axios.get(`http://localhost:5000/api/products/${productId}`);
+    const res = await axios.get(`${API_URL}/api/products/${productId}`);
     return res.data;
   }
 );
@@ -44,7 +45,7 @@ export const fetchSizeRecommendation = createAsyncThunk(
   'products/fetchSizeRecommendation',
   async ({ productId, measurements }) => {
     // This new backend endpoint will take user measurements and return a size.
-    const res = await axios.post(`http://localhost:5000/api/products/${productId}/size-recommendation`, { measurements });
+    const res = await axios.post(`${API_URL}/api/products/${productId}/size-recommendation`, { measurements });
     return res.data; // e.g., { recommendedSize: 'M', reasoning: '...' }
   }
 );
@@ -54,7 +55,7 @@ export const fetchOutfitRecommendation = createAsyncThunk(
   'products/fetchOutfitRecommendation',
   async (productId) => {
     // This new backend endpoint would use an AI service to find complementary items.
-    const res = await axios.get(`http://localhost:5000/api/products/${productId}/outfit-recommendation`);
+    const res = await axios.get(`${API_URL}/api/products/${productId}/outfit-recommendation`);
     return res.data;
   }
 );

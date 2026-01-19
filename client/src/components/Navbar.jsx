@@ -17,6 +17,7 @@ import { logout } from "../Store/authSlice";
 import { fetchCart } from "../Store/cartSlice"; 
 import AuthCard from "./AuthCard";
 import SearchBar from "./SearchBar";
+import { API_URL } from "../config";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const Navbar = () => {
 
   // Fetch Search Products
   useEffect(() => {
-    fetch("http://localhost:5000/api/products")
+    fetch(`${API_URL}/api/products`)
       .then((res) => res.json())
       .then(setProducts)
       .catch(console.error);
@@ -106,7 +107,7 @@ const Navbar = () => {
             <IconButton onClick={(e) => dispatch(openMenu(e.currentTarget))} sx={{ color: "black" }}>
               {isLoggedIn && user?.image ? (
                 <Avatar
-                  src={`http://localhost:5000${user.image}`}
+                  src={`${API_URL}${user.image}`}
                   sx={{ width: 32, height: 32 }}
                 />
               ) : (
