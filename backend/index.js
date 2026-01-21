@@ -6,15 +6,6 @@ import path from "path";
 
 
 
-const __dirname = path.resolve();
-
-app.use(express.static(path.join(__dirname, "client/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/dist", "index.html"));
-});
-
-
 
 // ✅ Route imports
 import authRoutes from "./routes/authRoutes.js";
@@ -27,6 +18,15 @@ import orderRoutes from "./routes/orderRoutes.js";
 // import Cart from "./model/Cart.js";
 // import Order from "./model/Order.js";
 // import Product from "./model/Product.js";
+
+
+const __dirname = path.resolve();
+
+app.use(express.static(path.join(__dirname, "client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/dist", "index.html"));
+});
 
 
 dotenv.config();
