@@ -4,6 +4,18 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import path from "path";
 
+
+
+const __dirname = path.resolve();
+
+app.use(express.static(path.join(__dirname, "client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/dist", "index.html"));
+});
+
+
+
 // ✅ Route imports
 import authRoutes from "./routes/authRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
