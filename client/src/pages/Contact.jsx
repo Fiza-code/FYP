@@ -61,8 +61,8 @@ const Contact = () => {
             Suite 350, Washington, USA
           </Typography>
           <Typography variant="body1" sx={{ color: "grey", mb: 2 }}>
-            Tel: (415) 555-0132 <br />
-            Email: admin@forever.com
+            Tel: 03124330949 <br />
+            Email: admin@nexawear.com
           </Typography>
 
           <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>

@@ -11,7 +11,7 @@ const companyLinks = [
 
 const contactInfo = [
   { text: '+1-000-000-0000', href: 'tel:+10000000000' },
-  { text: 'greatstackdev@gmail.com', href: 'mailto:greatstackdev@gmail.com' },
+  { text: 'nexawear@gmail.com', href: 'mailto:nexawear@gmail.com' },
 ];
 
 const Footer = () => {
@@ -33,7 +33,7 @@ const Footer = () => {
           {/* Brand and paragraph */}
           <Grid item xs={12} md={5}>
             <Typography variant="h6" component="p" fontWeight="bold">
-              FOREVER<span style={{ color: '#D08CAB' }}>.</span>
+              NEXAWEAR<span style={{ color: '#D08CAB' }}>.</span>
             </Typography>
             <Typography
               variant="body2"
@@ -95,7 +95,7 @@ const Footer = () => {
         {/* COPYRIGHT */}
         <Box mt={4} textAlign="center">
           <Typography variant="caption" color="text.secondary">
-            © {new Date().getFullYear()} greatstack.dev – All Rights Reserved.
+            © {new Date().getFullYear()} nexawear.dev – All Rights Reserved.
           </Typography>
         </Box>
       </Container>

@@ -1,7 +1,7 @@
 // import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // import axios from "axios";
+// import { API_URL } from "../config";
 
-// const API_URL = "http://localhost:5000/api/cart";
 
 // // ✅ Fetch Cart
 // export const fetchCart = createAsyncThunk(
@@ -76,13 +76,14 @@
 //   reducers: {},
 //   extraReducers: (builder) => {
 //     builder
+//       // --- FETCH ---
 //       .addCase(fetchCart.pending, (state) => {
 //         state.loading = true;
 //         state.error = null;
 //       })
 //       .addCase(fetchCart.fulfilled, (state, action) => {
 //         state.loading = false;
-//         state.products = Array.isArray(action.payload.products)
+//         state.products = Array.isArray(action.payload?.products)
 //           ? action.payload.products
 //           : [];
 //       })
@@ -90,20 +91,53 @@
 //         state.loading = false;
 //         state.error = action.payload || action.error.message;
 //       })
+
+//       // --- ADD ---
+//       .addCase(addToCart.pending, (state) => {
+//         state.loading = true;
+//         state.error = null;
+//       })
 //       .addCase(addToCart.fulfilled, (state, action) => {
-//         state.products = Array.isArray(action.payload.products)
+//         state.loading = false;
+//         state.products = Array.isArray(action.payload?.products)
 //           ? action.payload.products
 //           : state.products;
+//       })
+//       .addCase(addToCart.rejected, (state, action) => {
+//         state.loading = false;
+//         state.error = action.payload || action.error.message;
+//       })
+
+//       // --- UPDATE ---
+//       .addCase(updateQuantity.pending, (state) => {
+//         state.loading = true;
+//         state.error = null;
 //       })
 //       .addCase(updateQuantity.fulfilled, (state, action) => {
-//         state.products = Array.isArray(action.payload.products)
+//         state.loading = false;
+//         state.products = Array.isArray(action.payload?.products)
 //           ? action.payload.products
 //           : state.products;
 //       })
+//       .addCase(updateQuantity.rejected, (state, action) => {
+//         state.loading = false;
+//         state.error = action.payload || action.error.message;
+//       })
+
+//       // --- DELETE ---
+//       .addCase(deleteProduct.pending, (state) => {
+//         state.loading = true;
+//         state.error = null;
+//       })
 //       .addCase(deleteProduct.fulfilled, (state, action) => {
-//         state.products = Array.isArray(action.payload.products)
+//         state.loading = false;
+//         state.products = Array.isArray(action.payload?.products)
 //           ? action.payload.products
 //           : state.products;
+//       })
+//       .addCase(deleteProduct.rejected, (state, action) => {
+//         state.loading = false;
+//         state.error = action.payload || action.error.message;
 //       });
 //   },
 // });
@@ -114,6 +148,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { API_URL } from "../config";
 
+const CART_API = `${API_URL}/api/cart`;
 
 // ✅ Fetch Cart
 export const fetchCart = createAsyncThunk(
@@ -121,7 +156,7 @@ export const fetchCart = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const userId = thunkAPI.getState().auth.user?._id || "user123";
-      const res = await axios.get(`${API_URL}/${userId}`);
+      const res = await axios.get(`${CART_API}/${userId}`);
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
@@ -135,7 +170,7 @@ export const addToCart = createAsyncThunk(
   async (product, thunkAPI) => {
     try {
       const userId = thunkAPI.getState().auth.user?._id || "user123";
-      const res = await axios.post(`${API_URL}/add`, {
+      const res = await axios.post(`${CART_API}/add`, {
         userId,
         productId: product._id,
       });
@@ -152,7 +187,7 @@ export const updateQuantity = createAsyncThunk(
   async ({ productId, action }, thunkAPI) => {
     try {
       const userId = thunkAPI.getState().auth.user?._id || "user123";
-      const res = await axios.put(`${API_URL}/update`, {
+      const res = await axios.put(`${CART_API}/update`, {
         userId,
         productId,
         action,
@@ -170,7 +205,7 @@ export const deleteProduct = createAsyncThunk(
   async (productId, thunkAPI) => {
     try {
       const userId = thunkAPI.getState().auth.user?._id || "user123";
-      const res = await axios.delete(`${API_URL}/delete/${userId}/${productId}`);
+      const res = await axios.delete(`${CART_API}/delete/${userId}/${productId}`);
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
@@ -188,7 +223,7 @@ const cartSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // --- FETCH ---
+      // FETCH
       .addCase(fetchCart.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -204,7 +239,7 @@ const cartSlice = createSlice({
         state.error = action.payload || action.error.message;
       })
 
-      // --- ADD ---
+      // ADD
       .addCase(addToCart.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -220,7 +255,7 @@ const cartSlice = createSlice({
         state.error = action.payload || action.error.message;
       })
 
-      // --- UPDATE ---
+      // UPDATE
       .addCase(updateQuantity.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -236,7 +271,7 @@ const cartSlice = createSlice({
         state.error = action.payload || action.error.message;
       })
 
-      // --- DELETE ---
+      // DELETE
       .addCase(deleteProduct.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -255,3 +290,4 @@ const cartSlice = createSlice({
 });
 
 export default cartSlice.reducer;
+

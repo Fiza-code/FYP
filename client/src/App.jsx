@@ -27,7 +27,7 @@ function App() {
         {/* <Route path="login" element={<Login />} /> */}
   {/* <Route path="placeOrder"element={<PlaceOrder />} />
         <Route path="placeorder" element={<PlaceOrder />} /> */}
-         <Route path="/admin/*" element={<AdminPanel />} />
+         <Route path="admin/*" element={<AdminPanel />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/profile" element={<Profile />} />
 
