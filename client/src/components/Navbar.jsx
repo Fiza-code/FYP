@@ -90,7 +90,7 @@ const Navbar = () => {
                 variant="outlined"
                 size="small"
                 sx={{ textTransform: "none", ml: 2, color: "black", borderColor: "black" }}
-                onClick={() => isLoggedIn ? window.open("/admin", "_blank") : setAuthOpen(true)}
+                onClick={() => isLoggedIn ? navigate("/admin") : setAuthOpen(true)}
               >
                 Admin Panel
               </Button>
@@ -190,7 +190,11 @@ const Navbar = () => {
             <ListItem
               button
               onClick={() => {
-                isLoggedIn ? window.open("/admin", "_blank") : setAuthOpen(true);
+                if (isLoggedIn) {
+                  navigate("/admin");
+                } else {
+                  setAuthOpen(true);
+                }
                 dispatch(closeDrawer());
               }}
             >
