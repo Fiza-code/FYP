@@ -62,7 +62,7 @@ const About = () => {
             variant="body2"
             sx={{ color: '#555', fontSize: '0.95rem', lineHeight: 1.6, mb: 2 }}
           >
-            Forever was born out of a passion for innovation and a desire to revolutionize the way people shop online. 
+            Nexawear was born out of a passion for innovation and a desire to revolutionize the way people shop online. 
             Our journey began with a simple idea: to provide a platform where customers can easily discover, explore, 
             and purchase a wide range of products from the comfort of their homes.
           </Typography>
