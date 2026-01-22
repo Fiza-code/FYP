@@ -189,10 +189,15 @@ const Navbar = () => {
 
             <ListItem
               button
-              onClick={() => {
-                isLoggedIn ? window.open("/admin", "_blank") : setAuthOpen(true);
-                dispatch(closeDrawer());
-              }}
+            onClick={() => {
+  if (isLoggedIn) {
+    navigate("/admin");
+  } else {
+    setAuthOpen(true);
+  }
+  dispatch(closeDrawer());
+}}
+
             >
               <ListItemText primary="Admin Panel" />
             </ListItem>
